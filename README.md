@@ -45,7 +45,7 @@ volume_master: change the volume of the bus "master"
 
 volume_effects: changes the volume of sounds emitted by func `play()`
 
-volume_music: change the music volume
+volume_music: change the music volume, emitted by func `play_soundtrack()`
  
 volume_world: changes the volume of `Audio2D` and `Audio3D` nodes
 
