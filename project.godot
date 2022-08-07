@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "AudioStreamPlayer",
+"class": "AudioShot",
+"language": "GDScript",
+"path": "res://addons/audio_system/ephemeral.gd"
+} ]
+_global_script_class_icons={
+"AudioShot": "res://addons/audio_system/img/ephemeral.svg"
+}
+
+[application]
+
+config/name="Audio System"
+run/main_scene="res://scene/main.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+AudioSystem="*res://addons/audio_system/autoload.gd"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/audio_system/plugin.cfg" )
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

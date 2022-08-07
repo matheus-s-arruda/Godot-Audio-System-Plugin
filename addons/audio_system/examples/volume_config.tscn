@@ -1,0 +1,255 @@
+[gd_scene load_steps=9 format=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.2, 0.227451, 0.309804, 1 )
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends PanelContainer
+
+
+onready var slider_master = $MarginContainer/VBoxContainer/master/master
+onready var slider_music = $MarginContainer/VBoxContainer/music/music
+onready var slider_world = $MarginContainer/VBoxContainer/effects/effects
+onready var slider_effects = $MarginContainer/VBoxContainer/world/world
+
+
+func _ready():
+	slider_master.value = AudioSystem.volume_master
+	slider_effects.value = AudioSystem.volume_effects
+	slider_music.value = AudioSystem.volume_music
+	slider_world.value = AudioSystem.volume_world
+
+
+func _on_slider_gui_input(event : InputEvent):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and not event.is_pressed():
+		print(\"Slider update.\\nYou can use this event to save slider values.\")
+
+
+func _on_master_value_changed(value):
+	AudioSystem.volume_master = value
+
+
+func _on_effects_value_changed(value):
+	AudioSystem.volume_effects = value
+
+
+func _on_music_value_changed(value):
+	AudioSystem.volume_music = value
+
+
+func _on_world_value_changed(value):
+	AudioSystem.volume_world = value
+
+"
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.12549, 0.141176, 0.192157, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 8.0
+bg_color = Color( 0.14902, 0.172549, 0.231373, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+content_margin_top = 8.0
+bg_color = Color( 0.219608, 0.266667, 0.368627, 1 )
+border_width_bottom = 4
+border_color = Color( 0.407843, 0.611765, 0.909804, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+content_margin_top = 8.0
+bg_color = Color( 0.317647, 0.337255, 0.384314, 1 )
+border_width_bottom = 4
+border_color = Color( 0.407843, 0.611765, 0.909804, 1 )
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Button
+
+
+
+func _on_test_pressed():
+	AudioSystem.play(\"res://addons/audio_system/examples/tome.mp3\", true)
+"
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Button
+
+
+func _on_test_pressed():
+	AudioSystem.play(\"res://addons/audio_system/examples/tome.mp3\", false)
+"
+
+[node name="config" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="volume_panel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -236.0
+margin_top = -90.0
+margin_right = 236.0
+margin_bottom = 90.0
+custom_styles/panel = SubResource( 1 )
+script = SubResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="volume_panel"]
+margin_right = 472.0
+margin_bottom = 180.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="volume_panel/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 468.0
+margin_bottom = 176.0
+custom_constants/separation = 4
+
+[node name="master" type="Panel" parent="volume_panel/MarginContainer/VBoxContainer"]
+margin_right = 464.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Label" type="Label" parent="volume_panel/MarginContainer/VBoxContainer/master"]
+anchor_left = 0.0163934
+anchor_right = 0.377049
+anchor_bottom = 1.0
+margin_left = -7.60656
+margin_right = -7.60655
+custom_styles/normal = SubResource( 2 )
+text = "Volume Master"
+valign = 1
+clip_text = true
+
+[node name="master" type="HSlider" parent="volume_panel/MarginContainer/VBoxContainer/master"]
+anchor_left = 0.393443
+anchor_right = 0.983607
+anchor_bottom = 1.0
+max_value = 1.0
+step = 0.01
+
+[node name="effects" type="Panel" parent="volume_panel/MarginContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 464.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Label" type="Label" parent="volume_panel/MarginContainer/VBoxContainer/effects"]
+anchor_left = 0.0163934
+anchor_right = 0.377049
+anchor_bottom = 1.0
+margin_left = -7.60656
+margin_right = -7.60655
+custom_styles/normal = SubResource( 2 )
+text = "Volume effects"
+valign = 1
+clip_text = true
+
+[node name="effects" type="HSlider" parent="volume_panel/MarginContainer/VBoxContainer/effects"]
+anchor_left = 0.393443
+anchor_right = 0.983607
+anchor_bottom = 1.0
+max_value = 1.0
+step = 0.01
+
+[node name="music" type="Panel" parent="volume_panel/MarginContainer/VBoxContainer"]
+margin_top = 88.0
+margin_right = 464.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Label" type="Label" parent="volume_panel/MarginContainer/VBoxContainer/music"]
+anchor_left = 0.0163934
+anchor_right = 0.377049
+anchor_bottom = 1.0
+margin_left = -7.60656
+margin_right = -7.60655
+custom_styles/normal = SubResource( 2 )
+text = "Volume music"
+valign = 1
+clip_text = true
+
+[node name="music" type="HSlider" parent="volume_panel/MarginContainer/VBoxContainer/music"]
+anchor_left = 0.393443
+anchor_right = 0.983607
+anchor_bottom = 1.0
+max_value = 1.0
+step = 0.01
+
+[node name="world" type="Panel" parent="volume_panel/MarginContainer/VBoxContainer"]
+margin_top = 132.0
+margin_right = 464.0
+margin_bottom = 172.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="Label" type="Label" parent="volume_panel/MarginContainer/VBoxContainer/world"]
+anchor_left = 0.0163934
+anchor_right = 0.377049
+anchor_bottom = 1.0
+margin_left = -7.60656
+margin_right = -7.60655
+custom_styles/normal = SubResource( 2 )
+text = "Volume world"
+valign = 1
+clip_text = true
+
+[node name="world" type="HSlider" parent="volume_panel/MarginContainer/VBoxContainer/world"]
+anchor_left = 0.393443
+anchor_right = 0.983607
+anchor_bottom = 1.0
+max_value = 1.0
+step = 0.01
+
+[node name="test" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -216.0
+margin_top = -152.0
+margin_right = -40.0
+margin_bottom = -118.0
+focus_mode = 0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/normal = SubResource( 5 )
+text = "test stackable audio"
+script = SubResource( 6 )
+
+[node name="test2" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = -152.0
+margin_right = 216.0
+margin_bottom = -118.0
+focus_mode = 0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/normal = SubResource( 5 )
+text = "test non-stackable audio"
+script = SubResource( 7 )
+
+[connection signal="gui_input" from="volume_panel/MarginContainer/VBoxContainer/master/master" to="volume_panel" method="_on_slider_gui_input"]
+[connection signal="value_changed" from="volume_panel/MarginContainer/VBoxContainer/master/master" to="volume_panel" method="_on_master_value_changed"]
+[connection signal="gui_input" from="volume_panel/MarginContainer/VBoxContainer/effects/effects" to="volume_panel" method="_on_slider_gui_input"]
+[connection signal="value_changed" from="volume_panel/MarginContainer/VBoxContainer/effects/effects" to="volume_panel" method="_on_effects_value_changed"]
+[connection signal="gui_input" from="volume_panel/MarginContainer/VBoxContainer/music/music" to="volume_panel" method="_on_slider_gui_input"]
+[connection signal="value_changed" from="volume_panel/MarginContainer/VBoxContainer/music/music" to="volume_panel" method="_on_music_value_changed"]
+[connection signal="gui_input" from="volume_panel/MarginContainer/VBoxContainer/world/world" to="volume_panel" method="_on_slider_gui_input"]
+[connection signal="value_changed" from="volume_panel/MarginContainer/VBoxContainer/world/world" to="volume_panel" method="_on_world_value_changed"]
+[connection signal="pressed" from="test" to="test" method="_on_test_pressed"]
+[connection signal="pressed" from="test2" to="test2" method="_on_test_pressed"]

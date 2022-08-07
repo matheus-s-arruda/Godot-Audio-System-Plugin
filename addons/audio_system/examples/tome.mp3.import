@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/tome.mp3-030e2ab668319e86bdffa0653345c102.mp3str"
+
+[deps]
+
+source_file="res://addons/audio_system/examples/tome.mp3"
+dest_files=[ "res://.import/tome.mp3-030e2ab668319e86bdffa0653345c102.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
