@@ -20,7 +20,6 @@ var mute_world := false setget _mute_world
 
 
 func _ready():
-	add_to_group("AudioSystem")
 	add_child(soundTrackPlayer[0])
 	add_child(soundTrackPlayer[1])
 	add_child(tween)
